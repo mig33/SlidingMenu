@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<artifactId>slidingmenu</artifactId>
 	<name>SlidingMenu</name>
 	<packaging>apklib</packaging>
@@ -20,44 +18,49 @@
 			<artifactId>android</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.google.android</groupId>
-			<artifactId>support-v4</artifactId>
+			<groupId>android.support</groupId>
+			<artifactId>compatibility-v4</artifactId>
+			<type>jar</type>
 		</dependency>
+		<dependency>
+            <groupId>android.support</groupId>
+            <artifactId>compatibility-v7-appcompat</artifactId>
+            <version>19.0.1</version>
+            <type>apklib</type>
+        </dependency>
+        <dependency>
+            <groupId>android.support</groupId>
+            <artifactId>compatibility-v7-appcompat</artifactId>
+            <version>19.0.1</version>
+            <type>jar</type>
+        </dependency>
 	</dependencies>
 
 	<build>
-    <sourceDirectory>src</sourceDirectory>
-
+		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
-				<artifactId>android-maven-plugin</artifactId>
-				<extensions>true</extensions>
+                <artifactId>android-maven-plugin</artifactId>
 				<configuration>
+				    <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
+				    <assetsDirectory>ignored</assetsDirectory>
+				    <resourceDirectory>${project.basedir}/res</resourceDirectory>
 					<nativeLibrariesDirectory>ignored</nativeLibrariesDirectory>
+					<sdk>
+                        <platform>16</platform>
+                    </sdk>
+                    <undeployBeforeDeploy>true</undeployBeforeDeploy>
 				</configuration>
+				<extensions>true</extensions>
 			</plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>attach-artifact</goal>
-                        </goals>
-                        <configuration>
-                            <artifacts>
-                                <artifact>
-                                    <type>jar</type>
-                                    <file>${project.build.directory}/${project.build.finalName}.jar</file>
-                                </artifact>
-                            </artifacts>
-                        </configuration>
-                    </execution>
-                </executions>
+			<plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
             </plugin>
 		</plugins>
 	</build>
