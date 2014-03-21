@@ -25,3 +25,4 @@ target/
 library/.settings/org.eclipse.jdt.core.prefs
 library/.project
 library/project.properties
+library/libs/android-support-v7-appcompat.jar
